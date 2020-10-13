@@ -61,9 +61,6 @@ public class WordUtils {
 
         all_syllables = new String[count[0] * count[1] * count[2]];
 
-        System.out.println(all_syllables.length);
-        System.out.println(Arrays.toString(count));
-//        precomputed = new int[180][8];
     }
 
     public static String[] breakdown_syllable(String syll) {

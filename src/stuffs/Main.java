@@ -16,7 +16,7 @@ import static stuffs.WordUtils.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(new FileReader("Viet74K.txt"));
+        Scanner in = new Scanner(new FileReader("Viet39K.txt"));
         Long2ObjectOpenHashMap<IntArraySet> hash_map = new Long2ObjectOpenHashMap<>();
         Int2ObjectAVLTreeMap<IntArraySet> set = new Int2ObjectAVLTreeMap<>();
         loop:
@@ -47,7 +47,7 @@ public class Main {
                     continue;
                 }
                 shash = spelling_hash(breakdown[0], breakdown[1], breakdown[2]);
-                all_syllables[shash] = Normalizer.normalize(syllables[0], Normalizer.Form.NFD).toLowerCase();
+                all_syllables[shash] = Normalizer.normalize(syllables[0], Normalizer.Form.NFC).toLowerCase();
                 hash = phonetic_hash(breakdown[0], breakdown[1], breakdown[2]);
                 set.computeIfAbsent((int) hash, x -> new IntArraySet()).add(-shash - 1);
             }
@@ -60,13 +60,36 @@ public class Main {
                 a.add(list.getInt(j));
             }
         }
-        hash_map.long2ObjectEntrySet().removeIf(x -> x.getValue().size() < 3);
+        hash_map.long2ObjectEntrySet().removeIf(x -> x.getValue().size() < 2 || (x.getValue().size() < 3 && x.getValue().toIntArray()[0] > 0));
         Long2ObjectAVLTreeMap<IntArraySet> tree_map = new Long2ObjectAVLTreeMap<>(hash_map);
         System.out.println(tree_map.size());
         System.out.println("done!");
         BufferedWriter writer = new BufferedWriter(new FileWriter("spoonerisms.txt"));
         for (Long2ObjectMap.Entry<IntArraySet> intArraySetEntry : tree_map.long2ObjectEntrySet()) {
-            writer.write(toString(intArraySetEntry.getValue(), set) + System.lineSeparator());
+            boolean passed = true;
+            if (intArraySetEntry.getValue().size() == 3) {
+                int word = 0;
+                for (int integer : intArraySetEntry.getValue()) {
+                    if (integer < 0) {
+                        word = integer;
+                        continue;
+                    }
+                    passed = false;
+                    if (set.get(integer).size() > 1) {
+                        passed = true;
+                        break;
+                    }
+                }
+                if (!passed) {
+                    passed = intArraySetEntry.getValue().contains((-word) / (all_syllables.length + 1));
+                }
+            }
+            if (passed) {
+                writer.write(toString(intArraySetEntry.getValue(), set) + System.lineSeparator());
+            }
+//            else{
+//                System.out.println(toString(intArraySetEntry.getValue(), set));
+//            }
         }
         writer.close();
     }
@@ -80,7 +103,7 @@ public class Main {
                 int first_syll = (-x) / (all_syllables.length + 1) - 1;
                 int sec_syll = (-x) % (all_syllables.length + 1) - 1;
                 if (first_syll == -1) {
-                    s.append(" ").append(all_syllables[sec_syll]).append(" /");
+                    s.append(" ").append(all_syllables[sec_syll]).append("/");
                 } else {
                     s.append(" ").append(all_syllables[first_syll]).append(" ").append(all_syllables[sec_syll]).append(" =");
                 }
