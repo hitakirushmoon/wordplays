@@ -103,7 +103,7 @@ public class Main {
                 int first_syll = (-x) / (all_syllables.length + 1) - 1;
                 int sec_syll = (-x) % (all_syllables.length + 1) - 1;
                 if (first_syll == -1) {
-                    s.append(" ").append(all_syllables[sec_syll]).append("/");
+                    s.append(" ").append(all_syllables[sec_syll]).append(" /");
                 } else {
                     s.append(" ").append(all_syllables[first_syll]).append(" ").append(all_syllables[sec_syll]).append(" =");
                 }
