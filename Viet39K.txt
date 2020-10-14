@@ -21035,7 +21035,7 @@ ngăm
 ngăm đe
 ngăm ngăm
 ngắm
-ngắm nghía
+ngắm ngía
 ngắm vuốt
 ngăn
 ngăn cách
@@ -24489,6 +24489,7 @@ phân trần
 phân tro
 phân trụ
 phân tử
+phân tử gram
 phân tử khối
 phân tử lượng
 phân ủ
@@ -26732,7 +26733,7 @@ rút bớt
 rút chạy
 rút cục
 rút cuộc
-rút gân
+rút gân.
 rút gọn
 rút lại
 rút lui
@@ -27671,7 +27672,7 @@ song toàn
 song trùng
 song truyền
 song tuyến
-song tử diệp
+song tử dịệp
 song viên
 sòng
 sòng bạc
@@ -27857,7 +27858,7 @@ sơ
 sơ bộ
 sơ cảo
 sơ cấp
-sơ chế
+sơ chế.
 sơ cứu
 sơ đẳng
 sơ đồ
@@ -35243,7 +35244,7 @@ tự phục vụ
 tự quản
 tự quản lí
 tự quân
-tự quyết
+tự quuyết
 tự quyền
 tự rút
 tự sản

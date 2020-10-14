@@ -16,7 +16,7 @@ import static stuffs.WordUtils.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(new FileReader("Viet39K.txt"));
+        Scanner in = new Scanner(new FileReader("filtered.txt"));
         Long2ObjectOpenHashMap<IntArraySet> hash_map = new Long2ObjectOpenHashMap<>();
         Int2ObjectAVLTreeMap<IntArraySet> set = new Int2ObjectAVLTreeMap<>();
         loop:
